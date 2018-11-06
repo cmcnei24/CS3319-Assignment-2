@@ -1,0 +1,57 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1050 (42S01) at line 10: Table 'assign2view' already exists
+--------------
+SELECT * FROM product
+--------------
+
+productid	description	cost	quantity
+11	Bike	150.00	200
+12	Socks	2.00	100
+66	Elbow Pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75.00	89
+98	Cows	56.00	12
+99	Helmet	29.00	30
+--------------
+SELECT * FROM agent
+--------------
+
+agentid	firstname	lastname	city	commission
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+56	Colin	McNeill	Sarnia	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT * FROM customer
+--------------
+
+customerid	firstname	lastname	city	phonenumber	agentid
+10	Barney	Rubble	Boston	777-1234	11
+12	Monty	Burns	Springfield	789-0000	99
+13	Wonder	Woman	Kypto	888-1234	33
+14	Peter	Griffens	Providence	987-4567	99
+15	Fred	Flintstone	Boston	777-2345	11
+21	Homer	Simpson	Springfield	686-8956	99
+31	Sideshow	Bob	Springfield	686-5555	66
+--------------
+SELECT * FROM purchases
+--------------
+
+customerid	productid	quantity
+14	66	19
+15	66	2
+15	78	2
+21	12	14
+21	66	10
+21	99	20
+31	12	2
+31	66	2
+31	78	4
+31	99	1
+--------------
+CREATE VIEW assign2view AS SELECT customer.firstname, customer.lastname, product.description, purchases.quantity, product.cost, product.cost * purchases.quantity AS "totalpaid"  FROM purchases JOIN customer ON purchases.customerid = customer.customerid JOIN product ON purchases.productid = product.productid
+--------------
+
