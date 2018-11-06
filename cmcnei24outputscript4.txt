@@ -1,5 +1,4 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1050 (42S01) at line 10: Table 'assign2view' already exists
 --------------
 SELECT * FROM product
 --------------
@@ -55,3 +54,26 @@ customerid	productid	quantity
 CREATE VIEW assign2view AS SELECT customer.firstname, customer.lastname, product.description, purchases.quantity, product.cost, product.cost * purchases.quantity AS "totalpaid"  FROM purchases JOIN customer ON purchases.customerid = customer.customerid JOIN product ON purchases.productid = product.productid
 --------------
 
+--------------
+SELECT * FROM assign2view
+--------------
+
+firstname	lastname	description	quantity	cost	totalpaid
+Peter	Griffens	Elbow Pads	19	14.25	270.75
+Fred	Flintstone	Elbow Pads	2	14.25	28.50
+Fred	Flintstone	Knee Pads	2	12.15	24.30
+Homer	Simpson	Socks	14	2.00	28.00
+Homer	Simpson	Elbow Pads	10	14.25	142.50
+Homer	Simpson	Helmet	20	29.00	580.00
+Sideshow	Bob	Socks	2	2.00	4.00
+Sideshow	Bob	Elbow Pads	2	14.25	28.50
+Sideshow	Bob	Knee Pads	4	12.15	48.60
+Sideshow	Bob	Helmet	1	29.00	29.00
+--------------
+SELECT * FROM assign2view WHERE totalpaid > 100
+--------------
+
+firstname	lastname	description	quantity	cost	totalpaid
+Peter	Griffens	Elbow Pads	19	14.25	270.75
+Homer	Simpson	Elbow Pads	10	14.25	142.50
+Homer	Simpson	Helmet	20	29.00	580.00
