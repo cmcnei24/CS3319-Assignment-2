@@ -1,0 +1,47 @@
+-- Script 3
+
+-- Query 1
+SELECT description FROM product;
+
+-- Query 2
+SELECT DISTINCT city FROM customer;
+
+-- Query 3
+SELECT * FROM agent ORDER BY city;
+
+-- Query 4
+SELECT firstname, lastname FROM customer WHERE city = 'Springfield';
+
+-- Query 5
+SELECT lastname FROM customer WHERE agentid = '11';
+
+-- Query 6
+SELECT description FROM product WHERE description LIKE '%pad%' OR '%Pad%';
+
+-- Query 7
+SELECT customer.lastname, product.description, purchases.quantity FROM purchases JOIN customer ON purchases.customerid = customer.customerid JOIN product ON purchases.productid = product.productid;
+
+--Query 8
+SELECT SUM(quantity) AS "Homer's Total Purchases" FROM purchases WHERE customerid = (SELECT customerid FROM customer WHERE firstname = 'Homer');
+
+-- Query 9
+SELECT customer.firstname, customer.lastname, SUM(purchases.quantity) FROM purchases JOIN customer ON purchases.customerid = customer.customerid GROUP BY customer.firstname;
+
+-- Query 10
+SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases);
+
+-- Query 11
+SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases WHERE customerid IN (SELECT customerid FROM customer WHERE firstname = "Fred" AND lastname = "Flintstone"));
+
+-- Query 12
+SELECT customer.firstname, customer.lastname, agent.firstname, agent.lastname FROM agent, customer WHERE agent.city = customer.city;
+
+-- Query 13
+SELECT SUM(quantity) AS "Total Knee Pads Purchased" FROM purchases WHERE productid IN (SELECT productid FROM product WHERE description = 'Knee Pads');
+
+-- Query 14
+SELECT description FROM product WHERE productid in (SELECT productid FROM purchases GROUP BY productid HAVING COUNT(purchases.productid) > 3);
+
+-- Query 15
+SELECT firstname, lastname FROM agent WHERE agentid IN (SELECT agentid FROM customer WHERE customerid IN (SELECT customerid FROM purchases WHERE productid = (SELECT productid FROM product WHERE description = "Knee Pads")));
+

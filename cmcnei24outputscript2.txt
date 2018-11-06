@@ -1,0 +1,183 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productid	description	cost	quantity
+11	Bike	150.00	200
+12	Socks	2.00	100
+78	Knee Pads	12.15	70
+88	Roller Blades	75.00	89
+99	Helmet	29.00	30
+--------------
+INSERT INTO product VALUES ('66', 'Elbow Pads', 14.25, 120)
+--------------
+
+--------------
+INSERT INTO product VALUES ('98', 'Cows', 56, 12)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('99', 'Hugh', 'Grant', 'Springfield', 16)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('22', 'Courtney', 'Cox', 'New York', 25)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('66', 'Rosie', 'ODonnell', 'Ottawa', 100)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('33', 'David', 'Letterman', 'Bedrock', 100)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('11', 'Regis', 'Philbin', 'Boston', 33)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('12', 'Rosie', 'Cox', 'Ottawa', 50)
+--------------
+
+--------------
+INSERT INTO agent VALUES ('56', 'Colin', 'McNeill', 'Sarnia', 100)
+--------------
+
+--------------
+INSERT INTO customer VALUES ('21', 'Homer', 'Simpson', 'Springfield', '686-8956', '99')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('31', 'Sideshow', 'Bob', 'Springfield', '686-5555', '66')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('12', 'Monty', 'Burns', 'Springfield', '789-0000', '99')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('15', 'Fred', 'Flintstone', 'Bedrock', '777-2345', '11')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('13', 'Super', 'Man', 'Kypto', '888-1234', '33')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('10', 'Barney', 'Rubble', 'Bedrock', '777-1234', '11')
+--------------
+
+--------------
+INSERT INTO customer VALUES ('14', 'Peter', 'Griffens', 'Providence', '987-4567', '99')
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('21', '99', 20)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('21', '12', 14)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('21', '66', 10)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('31', '99', 1)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('31', '12', 2)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('31', '78', 4)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('31', '66', 2)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('15', '66', 2)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('15', '78', 2)
+--------------
+
+--------------
+INSERT INTO purchases VALUES ('14', '66', 19)
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productid	description	cost	quantity
+11	Bike	150.00	200
+12	Socks	2.00	100
+66	Elbow Pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75.00	89
+98	Cows	56.00	12
+99	Helmet	29.00	30
+--------------
+SELECT * FROM agent
+--------------
+
+agentid	firstname	lastname	city	commission
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+56	Colin	McNeill	Sarnia	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT * FROM customer
+--------------
+
+customerid	firstname	lastname	city	phonenumber	agentid
+10	Barney	Rubble	Bedrock	777-1234	11
+12	Monty	Burns	Springfield	789-0000	99
+13	Super	Man	Kypto	888-1234	33
+14	Peter	Griffens	Providence	987-4567	99
+15	Fred	Flintstone	Bedrock	777-2345	11
+21	Homer	Simpson	Springfield	686-8956	99
+31	Sideshow	Bob	Springfield	686-5555	66
+--------------
+SELECT * FROM purchases
+--------------
+
+customerid	productid	quantity
+14	66	19
+15	66	2
+15	78	2
+21	12	14
+21	66	10
+21	99	20
+31	12	2
+31	66	2
+31	78	4
+31	99	1
+--------------
+UPDATE customer SET firstname = "Wonder", lastname = "Woman" WHERE firstname = "Super" AND lastname = "Man"
+--------------
+
+--------------
+UPDATE customer SET city = 'Boston' WHERE agentid = (SELECT agentid FROM agent WHERE firstname = 'RERROR 1146 (42S02) at line 46: Table 'cmcnei24assign2db.purchased' doesn't exist
+egis')
+--------------
+
+--------------
+UPDATE purchased SET quantity = 5 WHERE customerid = (SELECT customerid FROM customer WHERE firstname = 'Sideshow' AND lastname = 'Bob')
+--------------
+

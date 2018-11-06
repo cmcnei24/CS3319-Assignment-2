@@ -1,0 +1,87 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1146 (42S02) at line 42: Table 'cmcnei24assign2db.products' doesn't exist
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+cmcnei24assign2db
+flipped3
+mysql
+performance_schema
+--------------
+DROP DATABASE cmcnei24assign2db
+--------------
+
+--------------
+CREATE DATABASE cmcnei24assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON cmcnei24assign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE product (productid VARCHAR(2) NOT NULL, description VARCHAR(20), cost DECIMAL(10,2), quantity INT, PRIMARY KEY (productid))
+--------------
+
+--------------
+CREATE TABLE agent (agentid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), commission INT, PRIMARY KEY (agentid))
+--------------
+
+--------------
+CREATE TABLE customer (customerid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), phonenumber VARCHAR(8), agentid VARCHAR(2) NOT NULL, FOREIGN KEY (agentid) REFERENCES agent(agentid) ON DELETE RESTRICT, PRIMARY KEY (customerid))
+--------------
+
+--------------
+CREATE TABLE purchases (customerid VARCHAR(2) NOT NULL, productid VARCHAR(2) NOT NULL, quantity INT, PRIMARY KEY (customerid, productid), FOREIGN KEY (customerid) REFERENCES customer(customerid) ON DELETE CASCADE, FOREIGN KEY (productid) REFERENCES product(productid) ON DELETE CASCADE, agentid VARCHAR(2) NOT NULL)
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_cmcnei24assign2db
+agent
+customer
+product
+purchases
+--------------
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productid	description	cost	quantity
+11	Bike	150.00	200
+12	Socks	2.00	100
+78	Knee Pads	12.15	70
+88	Roller Blades	75.00	89
+99	Helmet	29.00	30
+--------------
+INSERT INTO products VALUES ('66', 'Elbow Pads', 14.25, 120)
+--------------
+
