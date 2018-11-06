@@ -1,3 +1,5 @@
+USE cmcnei24assign2db;
+
 -- Script 3
 
 -- Query 1
@@ -21,7 +23,7 @@ SELECT description FROM product WHERE description LIKE '%pad%' OR '%Pad%';
 -- Query 7
 SELECT customer.lastname, product.description, purchases.quantity FROM purchases JOIN customer ON purchases.customerid = customer.customerid JOIN product ON purchases.productid = product.productid;
 
---Query 8
+-- Query 8
 SELECT SUM(quantity) AS "Homer's Total Purchases" FROM purchases WHERE customerid = (SELECT customerid FROM customer WHERE firstname = 'Homer');
 
 -- Query 9
