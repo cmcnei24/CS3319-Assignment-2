@@ -1,0 +1,14 @@
+-- Script 4
+
+USE cmcnei24assign2db;
+
+SELECT * FROM product;
+SELECT * FROM agent;
+SELECT * FROM customer;
+SELECT * FROM purchases;
+
+CREATE VIEW assign2view AS SELECT customer.firstname, customer.lastname, product.description, purchases.quantity, product.cost, product.cost * purchases.quantity AS "totalpaid"  FROM purchases JOIN customer ON purchases.customerid = customer.customerid JOIN product ON purchases.productid = product.productid;
+
+SELECT * FROM assign2view;
+
+SELECT * FROM assign2view WHERE totalpaid > 100;
